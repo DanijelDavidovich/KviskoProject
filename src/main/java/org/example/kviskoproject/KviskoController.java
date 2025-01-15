@@ -12,9 +12,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class KviskoController implements Initializable {
 
@@ -46,7 +44,8 @@ public class KviskoController implements Initializable {
     private Button jokerBtn;
 
     int jokerUsage = 2;
-
+    ReadXMLFile questionsAndAnswers = new ReadXMLFile();
+    List<Question> quizQuestions = new ArrayList<>();
 
 
     @Override
@@ -57,13 +56,8 @@ public class KviskoController implements Initializable {
         jokerBox.setVisible(false);
         jokerBox.setManaged(false);
         ReadXMLFile.readXMLFile();
-        ReadXMLFile questionsAndAnswers = new ReadXMLFile();
-        for(int i=0; i<questionsAndAnswers.getQuestions().size(); i++){
-            Question q = questionsAndAnswers.getQuestions().get(i);
-            System.out.println("Question: " + q.getQuestionText());
-            System.out.println("Correct Answer: " + q.getCorrectAnswer());
-            System.out.println("Other Answerds: " + q.getAnswers());
-        }
+
+
 
     }
 
@@ -79,6 +73,32 @@ public class KviskoController implements Initializable {
         ansB.setText("Grifon*");
         ansC.setText("Minotaur");
         ansD.setText("Eaglion");
+
+        quizQuestions.clear();
+
+        ReadXMLFile.questionsSort();
+        getQuizQuestion();
+        shuffleQuizQuestions();
+
+        for(int i=0; i<quizQuestions.size(); i++){
+            System.out.println("Question number " + (i+1) + ".");
+            System.out.println("Text: " + quizQuestions.get(i).getQuestionText());
+            System.out.println("Correct Answer: " + quizQuestions.get(i).getCorrectAnswer());
+            System.out.println("Other Answerds: " + quizQuestions.get(i).getAnswers());
+            System.out.println();
+        }
+
+    }
+
+    private void getQuizQuestion() {
+        for(int i=0; i<15; i++){
+            quizQuestions.add(new Question(questionsAndAnswers.getQuestionsAsList().get(i)));
+            questionsAndAnswers.getQuestionsAsList().get(i).questionCounterIncrement();
+        }
+    }
+
+    private void shuffleQuizQuestions() {
+        Collections.shuffle(quizQuestions);
     }
 
 

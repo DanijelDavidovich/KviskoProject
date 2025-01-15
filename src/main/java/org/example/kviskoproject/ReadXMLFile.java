@@ -12,6 +12,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ReadXMLFile {
@@ -82,5 +84,17 @@ public class ReadXMLFile {
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void questionsSort() {
+        Collections.sort(questions, new Comparator<Question>() {
+            @Override
+            public int compare(Question questionOne, Question questionTwo) {
+                if(questionOne.getQuestionCounter() != questionTwo.getQuestionCounter()) {
+                    return Integer.compare(questionOne.getQuestionCounter(), questionTwo.getQuestionCounter());
+                }
+                return questionOne.getQuestionText().compareTo(questionTwo.getQuestionText());
+            }
+        });
     }
 }
