@@ -11,30 +11,30 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.example.kviskoproject.KviskoController"
-            prefHeight="300" prefWidth="1200">
+            prefHeight="300" prefWidth="3000">
 
     <top>
         <VBox fx:id="mainVbox" alignment="CENTER" style="-fx-padding: 50 0 0 0;">
-            <Label fx:id="titleText"/>
+            <Label fx:id="titleText" style="-fx-font-size: 24px" prefHeight="46" prefWidth="1200" wrapText="true" alignment="CENTER"/>
+            <Label fx:id="questionText" prefHeight="46" prefWidth="1200" wrapText="true" alignment="CENTER" />
         </VBox>
-<!--        <VBox fx:id="questionTextBox" alignment="CENTER" style="-fx-padding: 50 0 0 0;">-->
-<!--            <Label fx:id="questionText" text="Question text"/>-->
-<!--        </VBox>-->
+
     </top>
     <center>
         <VBox>
-            <HBox fx:id="initialButtons" alignment="CENTER" spacing="10" style="-fx-padding: 50 0 0 0;">
-                <Button fx:id="startBtn" text="Start"   onAction="#startGame" />
+            <VBox fx:id="initialButtons" alignment="CENTER" spacing="40" style="-fx-padding: 20 0 0 0;">
+                <Button fx:id="startBtn" text="START" prefHeight="70" prefWidth="70"  onAction="#startGame"
+                style="-fx-font-weight: bold "/>
                 <Button fx:id="rankBtn" text="Ranking List" />
-            </HBox>
-            <HBox fx:id="answerButtons" alignment="CENTER" spacing="30" style="-fx-padding: 35 0 0 0;">
+            </VBox>
+            <HBox fx:id="answerButtons" alignment="CENTER" spacing="30" style="-fx-padding: 30 0 0 0;">
                 <VBox spacing="15">
-                    <Button fx:id="ansA" onAction="#clickA" text="a" style="-fx-padding: 6 36;"/>
-                    <Button fx:id="ansC" onAction="#clickC" text="c" style="-fx-padding: 6 36;"/>
+                    <Button fx:id="ansA" onAction="#clickA" text="a" style="-fx-padding: 6 36;" prefWidth="160"/>
+                    <Button fx:id="ansC" onAction="#clickC" text="c" style="-fx-padding: 6 36;" prefWidth="160"/>
                 </VBox>
                 <VBox spacing="15">
-                    <Button fx:id="ansB" onAction="#clickB" text="b" style="-fx-padding: 6 36;"/>
-                    <Button fx:id="ansD" onAction="#clickD" style="-fx-padding: 6 36;"/>
+                    <Button fx:id="ansB" onAction="#clickB" text="b" style="-fx-padding: 6 36;" prefWidth="160"/>
+                    <Button fx:id="ansD" onAction="#clickD" text="b" style="6 36;" prefWidth="160"/>
                 </VBox>
             </HBox>
         </VBox>

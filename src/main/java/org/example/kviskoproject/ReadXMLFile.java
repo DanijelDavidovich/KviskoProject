@@ -68,17 +68,22 @@ public class ReadXMLFile {
 
                     // Ovde kupimo odgovore na pitanja
                     ArrayList<String> answers = new ArrayList<>();
+                    ArrayList<String> allAns = new ArrayList<>();
                     NodeList answerElement = questionElement.getElementsByTagName("answer");
                     for (int j = 0; j < answerElement.getLength(); j++) {
                         String answer = answerElement.item(j).getTextContent();
                         if (answer.contains("*")) {
                             question.setCorrectAnswer(answer.replace("*", ""));
+                            allAns.add(answer.replace("*", ""));
                         } else {
                             answers.add(answer);
+                            allAns.add(answer);
                         }
                     }
+
                     question.setAnswers(answers);
                     questions.add(question);
+                    question.setAllAnswers(allAns);
                 }
             }
         } catch (ParserConfigurationException | SAXException | IOException e) {
