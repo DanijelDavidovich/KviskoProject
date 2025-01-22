@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.kviskoproject.KviskoController"
+            prefHeight="300" prefWidth="3000"
+            stylesheets="@styling/kvisko.css" >
+
+    <top>
+        <VBox fx:id="mainVbox" alignment="CENTER" style="-fx-padding: 0 0 0 0;">
+            <Label fx:id="titleText" prefHeight="46" prefWidth="1200" wrapText="true" alignment="CENTER" style="-fx-padding: 50 0 0 0;"/>
+            <VBox fx:id="questionBox" alignment="CENTER">
+                <Label fx:id="questionTimer" style="-fx-font-size: 18px" alignment="CENTER" />
+                <Label fx:id="questionText" style="-fx-font-size: 16px" prefHeight="120" prefWidth="600" wrapText="true" alignment="CENTER" />
+            </VBox>
+
+        </VBox>
+
+    </top>
+    <center>
+        <VBox>
+            <VBox fx:id="initialButtons" alignment="CENTER" spacing="40" style="-fx-padding: 50 0 0 0;">
+                <Button fx:id="startBtn" text="START" prefHeight="70" prefWidth="70"  onAction="#startGame"
+                style="-fx-font-weight: bold " styleClass="signika"/>
+
+            </VBox>
+            <HBox fx:id="answerButtons" alignment="CENTER" spacing="30" style="-fx-padding: 40 0 40 0;">
+                <VBox spacing="15">
+                    <Button fx:id="ansA" styleClass="ansBtn" onAction="#clickA" text="a" style="-fx-padding: 6 36;" prefWidth="160"/>
+                    <Button fx:id="ansC" styleClass="ansBtn" onAction="#clickC" text="c" style="-fx-padding: 6 36;" prefWidth="160"/>
+                </VBox>
+                <VBox spacing="15">
+                    <Button fx:id="ansB" styleClass="ansBtn" onAction="#clickB" text="b" style="-fx-padding: 6 36;" prefWidth="160"/>
+                    <Button fx:id="ansD" styleClass="ansBtn" onAction="#clickD" text="d" style="6 36;" prefWidth="160"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+    <bottom>
+        <VBox>
+            <HBox fx:id="rankBox" alignment="CENTER">
+                <Button fx:id="rankBtn" text="Ranking List" />
+            </HBox>
+            <HBox fx:id="jokerBox" alignment="CENTER">
+                <Button fx:id="jokerBtn" onAction="#jokerClick" text="50 : 50"/>
+            </HBox>
+        </VBox>
+    </bottom>
+
+</BorderPane>

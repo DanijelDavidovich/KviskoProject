@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.kviskoproject.ResultController"
+            prefHeight="300.0" prefWidth="400.0">
+    <center>
+        <VBox alignment="CENTER" spacing="20">
+            <Label fx:id="resultTitle" text="Result title" />
+            <Label fx:id="resultMessage" text="Message about result of quiz..."/>
+            <VBox fx:id="score">
+                <Label fx:id="scoreTitle" text="Score:" />
+                <Label fx:id="nickname" text="nickname" />
+                <Label fx:id="correctAnswers" text="Correct Answers: 5" />
+                <Label fx:id="averageTime" text="15" />
+            </VBox>
+            <Button fx:id="startMenuBtn" text="Start Menu"/>
+        </VBox>
+    </center>
+
+</BorderPane>

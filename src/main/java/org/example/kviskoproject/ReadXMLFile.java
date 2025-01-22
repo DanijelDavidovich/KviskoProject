@@ -90,16 +90,4 @@ public class ReadXMLFile {
             e.printStackTrace();
         }
     }
-
-    public static void questionsSort() {
-        Collections.sort(questions, new Comparator<Question>() {
-            @Override
-            public int compare(Question questionOne, Question questionTwo) {
-                if(questionOne.getQuestionCounter() != questionTwo.getQuestionCounter()) {
-                    return Integer.compare(questionOne.getQuestionCounter(), questionTwo.getQuestionCounter());
-                }
-                return questionOne.getQuestionText().compareTo(questionTwo.getQuestionText());
-            }
-        });
-    }
 }
