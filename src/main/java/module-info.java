@@ -1,7 +1,8 @@
 module org.example.kviskoproject {
     requires javafx.controls;
     requires javafx.fxml;
-    requires java.xml;
+    requires static lombok;
+    requires java.desktop;
 
 
     opens org.example.kviskoproject to javafx.fxml;
