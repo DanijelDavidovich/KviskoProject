@@ -1,6 +1,7 @@
 package org.example.kviskoproject;
 
 import javafx.animation.KeyFrame;
+import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -60,11 +64,16 @@ public class KviskoController implements Initializable {
 
     private int jokerUsage = 2;
     private ReadXMLFile questionsAndAnswers = new ReadXMLFile();
+
     private List<Question> quizQuestions = new ArrayList<>();
     private static Question currentQuestion;
-    int timeLeft = 60;
-    int averageTime = 0;
+
+    private List<Button> answerButtonsList = new ArrayList<>();
+
+
+    int timeLeft = 10;
     int timeSum = 0;
+
     private final String[] titleClasses = {"titleClassOn", "titleClassOff"};
     private int titleClassesIndex = 0;
 
@@ -77,8 +86,7 @@ public class KviskoController implements Initializable {
 
             // Kada dođe do 0, trigerujemo funkciju
             wrongAnswer();
-            quizResult("Game Over", "Time out! Try again...", "Player: Donald Trump", "Correct Answers: " + (getIndexOfNextQuestion() - 1), "Average time: " + (timeSum*1.0)/getIndexOfNextQuestion());
-//            ((Timeline) event.getSource()).stop(); // Zaustavljamo tajmer
+            quizResult("Game Over", "Time out! Try again...", "Donald Trump", "" + (getIndexOfNextQuestion() - 1), (timeSum*1.0)/getIndexOfNextQuestion());
         }
     }));
 
@@ -88,22 +96,14 @@ public class KviskoController implements Initializable {
         titleText.getStyleClass().add(titleClasses[titleClassesIndex]);
     }));
 
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         titleText.getStyleClass().add(titleClasses[0]);
         titleSwitch.setCycleCount(Timeline.INDEFINITE);
         titleSwitch.play();
-        answerButtons.setVisible(false);
-        answerButtons.setManaged(false);
-        questionBox.setVisible(false);
-        questionBox.setManaged(false);
-        titleText.setText("KVISKO");
-        jokerBox.setVisible(false);
-        jokerBox.setManaged(false);
         ReadXMLFile.readXMLFile();
+        answerButtonsList = new ArrayList<>(Arrays.asList(ansA, ansB, ansC, ansD));
+
     }
 
     public void startGame(ActionEvent actionEvent) {
@@ -123,23 +123,25 @@ public class KviskoController implements Initializable {
 
         quizQuestions.clear();
 
-        shuffleQuizQuestions();
         getQuizQuestion();
         updateingQuestionsText();
-        currentQuestion = quizQuestions.get(0);
+        currentQuestion = quizQuestions.getFirst();
 
         quizSet();
     }
 
     public void quizSet(){
+        int ansBtnOrd = 0;
+        timeLeft = 10;
+        questionText.setText(currentQuestion.getQuestionNumber() + ". " + currentQuestion.getQuestionText());
 
-        timeLeft = 60;
-        System.out.println(currentQuestion.getAllAnswers());
-        questionText.setText(currentQuestion.getQuestionNumber() + currentQuestion.getQuestionText());
-        ansA.setText(currentQuestion.getAllAnswers().get(0));
-        ansB.setText(currentQuestion.getAllAnswers().get(1));
-        ansC.setText(currentQuestion.getAllAnswers().get(2));
-        ansD.setText(currentQuestion.getAllAnswers().get(3));
+        for(Button ansBtn : answerButtonsList ){
+            ansBtn.setText(currentQuestion.getAllAnswers().get(ansBtnOrd));
+            ansBtnOrd++;
+        };
+
+        answersHandlers();
+
 
         questionTimer.setText(timeLeft + "");
 
@@ -150,6 +152,7 @@ public class KviskoController implements Initializable {
     }
 
     private void getQuizQuestion() {
+        Collections.shuffle(questionsAndAnswers.getQuestionsAsList());
         for(int i=0; i<15; i++){
             quizQuestions.add(questionsAndAnswers.getQuestionsAsList().get(i));
         }
@@ -157,12 +160,8 @@ public class KviskoController implements Initializable {
 
     private void updateingQuestionsText(){
         for(int i=0; i<15; i++){
-            quizQuestions.get(i).setQuestionNumber(i+1 + ". ");
+            quizQuestions.get(i).setQuestionNumber(i+1);
         }
-    }
-
-    private void shuffleQuizQuestions() {
-        Collections.shuffle(questionsAndAnswers.getQuestionsAsList());
     }
 
 
@@ -183,22 +182,10 @@ public class KviskoController implements Initializable {
         jokerUsage = 2;
     }
 
-
-
-    public void clickA(ActionEvent actionEvent) {
-        answerClickHandler(actionEvent);
-    }
-
-    public void clickB(ActionEvent actionEvent) {
-        answerClickHandler(actionEvent);
-    }
-
-    public void clickC(ActionEvent actionEvent) {
-        answerClickHandler(actionEvent);
-    }
-
-    public void clickD(ActionEvent actionEvent) {
-        answerClickHandler(actionEvent);
+    public void answersHandlers(){
+        for(Button btn : answerButtonsList){
+            btn.setOnAction(event -> answerClickHandler(event));
+        }
     }
 
     private void answerClickHandler(ActionEvent actionEvent) {
@@ -206,35 +193,43 @@ public class KviskoController implements Initializable {
         timeSum += timeLeft;
         if(source.getText().equals(currentQuestion.getCorrectAnswer())){
             int indexOfNextQuestion = getIndexOfNextQuestion();
-            if(indexOfNextQuestion >=0 && indexOfNextQuestion < quizQuestions.size()) {
+            if(indexOfNextQuestion < quizQuestions.size()) {
                 currentQuestion = quizQuestions.get(indexOfNextQuestion);
                 quizSet();
             }else{
-                quizResult("VICTORY", "Congratulations", "Player: Donald Trump", "Correct Answers: 15", "Average time: " + timeSum/15.0);
+                quizResult("You Win", "CONGRATULATIONS", "Donald Trump", "15",  (timeSum*1.0)/15);
                 wrongAnswer();
             }
         }else{
-            quizResult("Game Over", "Wrong answer! Try again...", "Player: Donald Trump", "Correct Answers: " + (getIndexOfNextQuestion() - 1), "Average time: " + (timeSum*1.0)/getIndexOfNextQuestion());
+            quizResult("Game Over", "Wrong answer! Try again...", "Donald Trump", "" + (getIndexOfNextQuestion() - 1), (timeSum*1.0)/getIndexOfNextQuestion());
             wrongAnswer();
         }
     }
 
-    private void quizResult(String resultTitle, String resultMessage, String nickname, String answers, String averageTime) {
+    private void quizResult(String resultTitle, String resultMessage, String nickname, String answers, double averageTime) {
         try {
             FXMLLoader quizResultLoader = new FXMLLoader(getClass().getResource("result-message.fxml"));
             Parent root = quizResultLoader.load();
             ResultController resultController = quizResultLoader.getController();
             resultController.setResultTitle(resultTitle);
             resultController.setMessage(resultMessage);
-            resultController.setNickname(nickname);
-            resultController.setCorrectAnswers(answers);
-            resultController.setAverageTime(averageTime);
+            resultController.setNicknameField(nickname);
+            resultController.setCorrAnsField(answers);
+            resultController.setAverTimeField(String.format("%.1f", averageTime));
+            if(resultTitle.equals("Game Over")){
+                resultController.setGameOverStyle();
+            }else{
+                resultController.setWinStyle();
+            }
 
 
             Stage resultWindow = new Stage();
             Scene quizResultScene = new Scene(root, 400, 300);
             resultWindow.setTitle("Result");
+            resultWindow.initStyle(StageStyle.UNDECORATED);
             resultWindow.setScene(quizResultScene);
+            resultWindow.initModality(Modality.APPLICATION_MODAL);
+            resultController.setResultStage(resultWindow);
             timeline.stop();
             resultWindow.show();
         }catch(Exception e){
@@ -243,17 +238,16 @@ public class KviskoController implements Initializable {
     }
 
     private int getIndexOfNextQuestion(){
-        return Integer.parseInt( currentQuestion.getQuestionNumber().replaceAll("[^0-9]", ""));
+        return currentQuestion.getQuestionNumber();
     }
 
     public void jokerClick(ActionEvent actionEvent) {
         ArrayList<Button> answers = new ArrayList<>();
         Random rand = new Random();
         int randomAnswerNum = rand.nextInt(3);
-        answers.add(ansA);
-        answers.add(ansB);
-        answers.add(ansC);
-        answers.add(ansD);
+        for(Button ansBtn : answerButtonsList){
+            answers.add(ansBtn);
+        }
 
         for(int i=0; i<3; i++){
             System.out.println("Unutar Jokera");
@@ -270,15 +264,11 @@ public class KviskoController implements Initializable {
     }
 
     private void jokerSwitch(){
-        ArrayList<Button> answers = new ArrayList<>();
-        answers.add(ansA);
-        answers.add(ansB);
-        answers.add(ansC);
-        answers.add(ansD);
-        answers.get(0).setDisable(false);
-        answers.get(1).setDisable(false);
-        answers.get(2).setDisable(false);
-        answers.get(3).setDisable(false);
+
+        for(Button ansBtn : answerButtonsList){
+            ansBtn.setDisable(false);
+        }
+
         System.out.println(jokerUsage);
         if(jokerUsage >= 0){
             jokerBtn.setDisable(false);

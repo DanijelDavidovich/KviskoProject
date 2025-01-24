@@ -16,8 +16,8 @@
 
     <top>
         <VBox fx:id="mainVbox" alignment="CENTER" style="-fx-padding: 0 0 0 0;">
-            <Label fx:id="titleText" prefHeight="46" prefWidth="1200" wrapText="true" alignment="CENTER" style="-fx-padding: 50 0 0 0;"/>
-            <VBox fx:id="questionBox" alignment="CENTER">
+            <Label fx:id="titleText" text="KVISKO" prefHeight="46" prefWidth="1200" wrapText="true" alignment="CENTER" style="-fx-padding: 50 0 0 0;"/>
+            <VBox fx:id="questionBox" alignment="CENTER" visible="false" managed="false">
                 <Label fx:id="questionTimer" style="-fx-font-size: 18px" alignment="CENTER" />
                 <Label fx:id="questionText" style="-fx-font-size: 16px" prefHeight="120" prefWidth="600" wrapText="true" alignment="CENTER" />
             </VBox>
@@ -32,14 +32,14 @@
                 style="-fx-font-weight: bold " styleClass="signika"/>
 
             </VBox>
-            <HBox fx:id="answerButtons" alignment="CENTER" spacing="30" style="-fx-padding: 40 0 40 0;">
+            <HBox fx:id="answerButtons" alignment="CENTER" spacing="30" style="-fx-padding: 40 0 40 0;" visible="false" managed="false">
                 <VBox spacing="15">
-                    <Button fx:id="ansA" styleClass="ansBtn" onAction="#clickA" text="a" style="-fx-padding: 6 36;" prefWidth="160"/>
-                    <Button fx:id="ansC" styleClass="ansBtn" onAction="#clickC" text="c" style="-fx-padding: 6 36;" prefWidth="160"/>
+                    <Button fx:id="ansA" styleClass="ansBtn"  text="a" style="-fx-padding: 6 36;" prefWidth="160"/>
+                    <Button fx:id="ansC" styleClass="ansBtn"  text="c" style="-fx-padding: 6 36;" prefWidth="160"/>
                 </VBox>
                 <VBox spacing="15">
-                    <Button fx:id="ansB" styleClass="ansBtn" onAction="#clickB" text="b" style="-fx-padding: 6 36;" prefWidth="160"/>
-                    <Button fx:id="ansD" styleClass="ansBtn" onAction="#clickD" text="d" style="6 36;" prefWidth="160"/>
+                    <Button fx:id="ansB" styleClass="ansBtn"  text="b" style="-fx-padding: 6 36;" prefWidth="160"/>
+                    <Button fx:id="ansD" styleClass="ansBtn"  text="d" style="6 36;" prefWidth="160"/>
                 </VBox>
             </HBox>
         </VBox>
@@ -49,7 +49,7 @@
             <HBox fx:id="rankBox" alignment="CENTER">
                 <Button fx:id="rankBtn" text="Ranking List" />
             </HBox>
-            <HBox fx:id="jokerBox" alignment="CENTER">
+            <HBox fx:id="jokerBox" alignment="CENTER" visible="false" managed="false">
                 <Button fx:id="jokerBtn" onAction="#jokerClick" text="50 : 50"/>
             </HBox>
         </VBox>

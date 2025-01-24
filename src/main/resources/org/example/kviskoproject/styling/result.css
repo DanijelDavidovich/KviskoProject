@@ -1,0 +1,117 @@
+
+.mainFrame{
+    -fx-border-width: 1px;
+    -fx-border-color: #000;
+    /*-fx-border-radius: 30 0 30 0;*/
+    /*-fx-background-color: #fff;*/
+    -fx-opacity: 1;
+}
+
+@font-face {
+    font-family: "Sixtyfour Convergence";
+    src: url("fonts/SixtyfourConvergence-Regular-VariableFont_BLED,SCAN,XELA,YELA.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-optical-sizing: auto;
+    font-variation-settings:
+            "BLED" 0,
+            "SCAN" 0,
+            "XELA" 0,
+            "YELA" 0;
+}
+
+.sixtyfour-convergence {
+    font-family: "Sixtyfour Convergence", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* TOP */
+
+#resultMessageBox{
+    -fx-pref-height: 60px;
+
+}
+
+.resultTitleGameOver{
+    -fx-font-family: Consolas;
+    -fx-text-fill: #d6336c;
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+}
+
+.resultMessageGameOver{
+    -fx-font-size: 12px;
+    -fx-font-family: Consolas;
+    -fx-text-fill: #0c8599;
+}
+
+.resultTitleWin{
+    -fx-font-family: Consolas;
+    -fx-text-fill: #0c8599;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.resultMessageWin{
+    -fx-font-family: "Sixtyfour Convergence", serif;
+    -fx-font-size: 20px;
+    -fx-text-fill: #0c8599;
+    -fx-padding: 4px 0;
+}
+
+.resultMessageWinTact{
+    -fx-font-family: "Sixtyfour Convergence", serif;
+    -fx-font-size: 24px;
+    -fx-text-fill: #0c8599;
+}
+
+
+#bottomLine{
+    -fx-padding: 1px 0;
+    -fx-background-color: #0c8599;
+}
+
+/* ------------------------------------------------------------------------------- */
+
+#scoreBox{
+    -fx-font-family: Consolas;
+}
+
+.scoreLabel{
+    -fx-text-fill: #0c8599;
+}
+
+.scoreData{
+    -fx-font-weight: bold;
+}
+
+#startMenuButtonBox{
+    -fx-background-color: #0c8599;
+}
+
+#startMenuBtn{
+    --fx-font-family: Consolas;
+    /*-fx-font-weight: 500;*/
+    -fx-background-color: #0c8599;
+    -fx-text-fill: #ffffff;
+    -fx-pref-width: 120px;
+    -fx-translate-y: -1px;
+    -fx-background-radius: 15 15 0 0;
+    -fx-cursor: hand;
+    -fx-font-size: 12px;
+    /*-fx-font-weight: bold;*/
+    -fx-letter-spacing: 1px;
+    -fx-border-width: 1px 1px 0 1px;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 15 15 0 0;
+}
+
+#startMenuBtn:hover{
+    -fx-background-color: #15aabf;
+    -fx-translate-y: -5px;
+}
+
+#startMenuBtn:pressed{
+    -fx-translate-y: 2px;
+}

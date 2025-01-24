@@ -10,19 +10,40 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.example.kviskoproject.ResultController"
-            prefHeight="300.0" prefWidth="400.0">
-    <center>
-        <VBox alignment="CENTER" spacing="20">
+            prefHeight="300.0" prefWidth="400.0"
+            stylesheets="@styling/result.css"
+            styleClass="mainFrame">
+    <top>
+        <VBox fx:id="resultTopBox" alignment="CENTER" spacing="10" style="-fx-padding: 30 0 0 0">
             <Label fx:id="resultTitle" text="Result title" />
-            <Label fx:id="resultMessage" text="Message about result of quiz..."/>
-            <VBox fx:id="score">
-                <Label fx:id="scoreTitle" text="Score:" />
-                <Label fx:id="nickname" text="nickname" />
-                <Label fx:id="correctAnswers" text="Correct Answers: 5" />
-                <Label fx:id="averageTime" text="15" />
-            </VBox>
-            <Button fx:id="startMenuBtn" text="Start Menu"/>
+            <HBox fx:id="resultMessageBox" alignment="CENTER">
+                <Label fx:id="resultMessage" text="Message about result of quiz..." style="-fx-padding: 0 0 0 0"/>
+            </HBox>
+
+            <HBox fx:id="bottomLine" />
+        </VBox>
+    </top>
+    <center>
+        <VBox fx:id="scoreBox" alignment="CENTER" spacing="5" style="-fx-padding: 0 120px">
+<!--                <Label fx:id="scoreTitle" text="Score:" />-->
+                <HBox>
+                    <Label fx:id="nicknameLabel" styleClass="scoreLabel" text="Nickname: " />
+                    <Label fx:id="nicknameField" styleClass="scoreData"/>
+                </HBox>
+                <HBox>
+                    <Label fx:id="corrAnsLabel" styleClass="scoreLabel" text="Correct Answers: " />
+                    <Label fx:id="corrAnsField" styleClass="scoreData" />
+                </HBox>
+                <HBox>
+                    <Label fx:id="averTimeLabel" styleClass="scoreLabel" text="Average Time: " />
+                    <Label fx:id="averTimeField" styleClass="scoreData" />
+                </HBox>
         </VBox>
     </center>
+    <bottom>
+        <HBox fx:id="startMenuButtonBox" styleClass="startMenuBtnBox" alignment="CENTER">
+            <Button fx:id="startMenuBtn" text="Start Menu" onAction="#startMenuBtnHandler"/>
+        </HBox>
 
+    </bottom>
 </BorderPane>

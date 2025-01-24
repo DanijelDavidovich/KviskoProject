@@ -13,6 +13,8 @@ public class KviskoApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(KviskoApplication.class.getResource("quiz.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 370);
         stage.setTitle("KVISKO");
+        stage.setResizable(false);
+//        stage.
         stage.setScene(scene);
         stage.show();
     }
